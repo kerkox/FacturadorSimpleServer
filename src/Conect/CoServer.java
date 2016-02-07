@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author Paulker
  */
-public class ConexionServer extends Thread {
+public class CoServer extends Thread {
 
     private ServerSocket server = null;
     private Socket socket = null;
@@ -18,11 +18,11 @@ public class ConexionServer extends Thread {
     private ObjectInputStream in;
     private int Port = 5000;
 
-    public ConexionServer(int puerto) {
+    public CoServer(int puerto) {
         this.Port = puerto;
     }
 
-    public ConexionServer() {
+    public CoServer() {
     }
 
     @Override

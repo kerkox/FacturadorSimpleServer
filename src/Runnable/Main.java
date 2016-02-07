@@ -1,7 +1,7 @@
 package Runnable;
 
 
-import Conect.ConexionServer;
+import Conect.CoServer;
 import Obj.Kardex;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-        ConexionServer servidor = new ConexionServer();
+        CoServer servidor = new CoServer();
         
         servidor.start();
         System.out.println("Servidor inciado");
