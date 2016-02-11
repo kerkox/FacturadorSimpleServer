@@ -25,10 +25,16 @@ public class GestorConexion {
             //agregado de enviar trama a cada uno
         }
     }
+
+    public ArrayList<Conexion> getConexiones() {
+        return conexiones;
+    }
+    
     
     
     public void conexionNueva(Conexion nueva){
         this.conexiones.add(nueva);
+       
     }
     
     public void desconecta(Conexion eliminar){

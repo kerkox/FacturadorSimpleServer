@@ -28,8 +28,22 @@ public class CoServer extends Thread {
     @Override
     public void run() {
         //Aqui ejecuto la conexion del servidor para quedar a la espera 
+        server = null;
         try {
             server = new ServerSocket(Port);
+            while (true) {
+                System.out.println("paso 1");
+                socket = server.accept();
+                System.out.println("--paso 2");
+                GestorConexion.getInstance().conexionNueva(new Conexion(socket));
+                Thread.sleep(1000);
+                System.out.println("Lista: ");
+                
+                for(Conexion con : GestorConexion.getInstance().getConexiones()){
+                    System.out.println("+"+con.getClienteID());
+                }
+                socket = null;
+            }
         } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(null, "ERROR AL ABRIR EL PUERTO");
@@ -39,37 +53,16 @@ public class CoServer extends Thread {
             }
         }
 
-        try {
-            while (true) {
-                socket = server.accept();
-                in = new ObjectInputStream(socket.getInputStream());
-                //Aqui para el gestor agregar una conexion activa
-                System.out.println("Se ha conectado al servidor ");
-
-                //lectura de objeto recibido
-                try {
-//                    while (true) {
-                        System.out.println("---Entro Al 2do ciclo");
-                        recibido = (Object) in.readObject();
-                        System.out.println("Leyo el Objecto");
-                        if (recibido instanceof Empleado) {
-                            Empleado e = (Empleado) recibido;
-                            System.out.println("Se recibio un Empleado");
-                            System.out.println("nombre: " + e.getNombre());
-                            System.out.println("id: " + e.getIdentificacion());
-                        } else {
-                            System.out.println("Es otro tipo de objeto");
-                        }
-//                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("error: "+ e.getMessage());
-                    System.err.println("fin conexion----");
-
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("FIn conexion");
-        }
+//        try {
+//            while (true) {
+//                socket = server.accept();
+//                in = new ObjectInputStream(socket.getInputStream());
+//                //Aqui para el gestor agregar una conexion activa
+//                System.out.println("Se ha conectado al servidor ");
+//
+//            }
+//        } catch (Exception ex) {
+//            System.out.println("FIn conexion");
+//        }
     }
 }
